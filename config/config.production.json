@@ -1,0 +1,26 @@
+{
+    "name": "XCEED365 HCM",
+    "description": "Xceed365 is a robust, reputable human resources management software that allows administrators to manage every aspect of a profitable human resources department. It is cloud based, and uniquely encompasses both talent management and workforce management solutions.",
+    "logoUrl": "./../src/assets/images/x365-logo.png",
+    "org": {
+        "name": "XCEED365 Limited",
+        "phoneNG": "+234-814-990-6365",
+        "phoneUS": "+1-855-572-8509",
+        "phoneUK": "+44-800-808-5462 ",
+        "www": "xceed365.com",
+        "wwwSupport": "support.xceed365.com",
+        "addressNG": "Suite 67, 2nd Floor, Kingsway Building, 51/52 Marina, Lagos, Nigeria",
+        "addressUS": "244 Maidison Avenue, New York City, New York, 1106-2817 USA.",
+        "addressUK": "120 High Road, East Finchley, London, N2 9ED, United Kingdo"
+    },
+    "apiAccess": {
+        "coreDataApi": "https://globalapi.xceed365.com/api"
+    },
+    "signinCoordinates": {
+        "tenant": "common",
+        "instance": "https://login.microsoftonline.com/",
+        "clientId": "f227b60a-44f3-4965-b5ea-19938cd71554",
+        "redirectUri": "http://localhost:5818/authorization",
+        "postLogoutRedirectUri": "http://localhost:5818/"
+    }
+}
