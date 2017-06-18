@@ -1,0 +1,138 @@
+    
+    .header-panel {
+        position: relative;
+        height: 70px;
+        background: white;
+        color: black;
+        background-image: url("./../../../assets/images/x365-logo.png");
+        background-repeat: no-repeat;
+        background-size: 180px 45px;
+        background-position: 10px 10px;
+        padding: 21px 5px 0px 7px;
+        padding-right: 0px !important;
+        margin-top: 0px;
+        border: 0px solid #BABABA;
+    }
+
+    .xceed365-logo {
+        position: relative;
+        width: 270px;
+        height: 85px;
+        margin: 50px 10px 5px 50px;
+        background-color: white;
+        background-image: url("./../../../assets/images/x365-logo.png");
+        background-repeat: no-repeat;
+        background-size: 240px 60px;
+        background-position: 10px 10px;
+        border: 1px solid #CFCFCF;
+    }
+
+    .xceed365-brief {
+        position: relative;
+        width: 700px;
+        height: 220px;
+        background-color: black;
+        margin: 290px 10px 5px 20px;
+        border: 0px solid #CFCFCF;
+    }
+
+    .opaque {
+        /* Theoretically for IE 8 & 9 (more valid) */
+        /* ...but not required as filter works too */
+        /* should come BEFORE filter */
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; // IE8
+
+        /* This works in IE 8 & 9 too */
+        /* ... but also 5, 6, 7 */
+        filter: alpha(opacity=30); // IE 5-7
+        
+        /* Modern Browsers */
+        opacity: 0.3;
+    }
+
+    .base-panel {
+        position: relative;
+        height: 530px;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        background-image: url("./../../../assets/images/home-banner.png");
+        background-repeat: no-repeat;
+        border: 0px solid #BABABA;
+        border-top: 0px solid #BABABA;
+    }
+
+    .btn-holder {
+        position: absolute;
+        top: 120px;
+        right: 0;
+        margin: 15px;
+    }
+
+    .base-panel .btn-holder button {
+        background: orange;
+        font-size: 1.7em;
+        letter-spacing: 0px;
+        line-height: 50%;
+        margin: 15px;
+        padding: 22px 30px;
+        border: 2px solid black;
+        color: #fff;
+        text-transform: none;
+    }
+
+    .base-panel .btn-holder button:hover {
+        border: 2px solid #949494;
+    }
+
+    .footer-panel {
+        position: relative;
+        height: 50px;
+        background: #D4D4D4;
+        color: black;
+        padding: 21px 5px 0px 7px;
+        padding-right: 0px !important;
+        margin-top: 5px;
+        border: 0px solid #BABABA;
+
+        a {
+            width: 100px;
+            color: #595959;
+            font-family: "Segoe UI" Verdana Calibri, Arial, "Helvetica Neue", Helvetica, Verdana, sans-serif, "Lucida Grande" !important;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            padding-left: 7px;
+            padding-right: 7px;
+            border-right: 1px solid gray;
+        }
+
+        a.mtc-adjustments {
+            border-right: 0px solid gray;
+        }
+
+        a.privacy-policy-adjustments {
+            padding-right: 30px;
+        }
+
+        a:link {
+            color: #595959;
+        }
+
+        a:visited {
+            color: #595959;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: maroon;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:active {
+            font-weight: normal;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    }

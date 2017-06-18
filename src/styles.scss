@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '_general';
+@import '_colors';
+@import '_mixins';
+@import './spinkit/spinners/spinner';
+@import './spinkit/spinners/9-cube-grid';
+
+body {
+    background: #DEDEDE;
+    color: black;
+    font-family:'Segoe UI', sans-serif !important;
+    
+    .loader {
+        background: white;
+
+        .container {
+            height: calc(100vh);
+
+            div {
+                margin:auto !important;
+                i {
+                    font-size: x-large;
+                    margin-top: calc(45vh);
+                }
+            }
+        }
+    }
+}

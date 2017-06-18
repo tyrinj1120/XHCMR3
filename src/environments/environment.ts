@@ -4,5 +4,17 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  name: "development",
+  production: false,
+  appName: "XCEED365 HCM",
+  apiAccess: {
+        "coreDataApi": "https://globalapi.xceed365.com/api"
+    },
+    signinCoordinates: {
+        "tenant": "common",
+        "instance": "https://login.microsoftonline.com/",
+        "clientId": "f227b60a-44f3-4965-b5ea-19938cd71554",
+        "redirectUri": "http://localhost:5818/authorization",
+        "postLogoutRedirectUri": "http://localhost:5818/"
+    }
 };
