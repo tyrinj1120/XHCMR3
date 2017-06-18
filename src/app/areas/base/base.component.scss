@@ -1,0 +1,685 @@
+@import './src/styles';
+
+nav.top-panel {
+    position: fixed;
+    height: $app_top_panel_height;
+    min-height: $app_top_panel_height;
+    background-color: $brand_color_main;
+    margin-bottom: 0;
+    right: 0;
+    top:0;
+    left: 0;
+    z-index: 1030;
+    border: 0;
+    border-radius: 0;
+
+    .container-fluid {
+       padding: 0;
+    }
+
+    .header-left-panel {
+         height: $app_top_panel_height;
+         margin: auto;
+     }
+
+     .navbar-right {
+       margin-right: 0px;
+    }
+
+    .app-menu {
+        position: relative;
+        height:  $app_top_panel_height;
+        width: $app_top_panel_height;
+        background-image: url("./../../../assets/images/x365-icon.png");
+        background-repeat: no-repeat;
+        background-size: 50%;
+        background-position: 50%;
+        background-color: black;
+        float: left;
+
+        a {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor:pointer;
+            text-decoration: none; /* No underlines on the link */
+            z-index: 10; /* Places the link above everything else in the div */
+            background-color: #FFF; /* Fix to make div clickable in IE */
+            opacity: 0; /* Fix to make div clickable in IE */
+            filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+        }
+    }
+
+    .app-logo  {
+        position: relative;
+        height: 100%;
+        width: 130px;
+        background-image: url("./../../../assets/images/x365-logo.png");
+        background-repeat: no-repeat;
+        background-size: 80% 69%;
+        background-position: 14px 6px;
+        background-color: $app_logo_background_color;
+        margin-right: 0px;
+        float: left;
+        outline: 0px solid black;
+        
+        a {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            text-decoration: none; /* No underlines on the link */
+            z-index: 10; /* Places the link above everything else in the div */
+            background-color: #FFF; /* Fix to make div clickable in IE */
+            opacity: 0; /* Fix to make div clickable in IE */
+            filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+        }
+    }
+
+    .app-edition-name  {
+        background-color: transparent;
+        color: white;
+        font-size: 1.02em;
+        font-weight: bold;
+        padding: 9px 12px;
+        float: left;
+    }
+
+    .app-module-name  {
+        background-color: transparent;
+        color: white;
+        font-size: 1.02em;
+        font-weight: bold;
+        padding: 9px 12px;
+        float: left;
+    }
+
+    .nav > li {
+            position: relative;
+            padding: 4px 12px 0px;
+            float:left;
+            height:  $app_top_panel_height;
+
+            .app-header-separator{
+                height:$app_header_separator_height !important;
+                border-right:1px solid $app_separator_color;
+            }
+    }
+
+    .navbar-left .nav > li {
+        padding: 0;
+    }
+
+    li.list-separator{
+        padding:$app_header_separator_pad 0px !important;
+    }
+
+    .app-profile-picture  {
+        background-image: url('./../../../assets/images/default-profile-pic.png');
+        position: relative;
+        height: $app_avatar_width_size;
+        width: $app_avatar_width_size;
+        border-radius: 50%;
+        margin-top: 3px;
+        background-color:$app_separator_color;
+        border: 3px solid #fff;
+        background-size: contain;
+        background-position-x: 69%;
+    }
+
+    .app-profile-name  {
+        color: white;
+        background-color: transparent;
+        font-size: 1.02em;
+        margin: 5px 0;
+        vertical-align: -webkit-baseline-middle;
+        font-weight: bold;
+        float: right;
+        outline: 0px solid gray;
+    }
+
+    .app-sign-out, .app-notifications  {
+        color: white;
+        font-size: 1.4em;
+        vertical-align: -webkit-baseline-middle;
+        padding-top: 2px;
+        float: right;
+        outline: 0px solid gray;
+        
+        a:link {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: $app_hover_color;
+            text-decoration: none;
+        }
+
+        a:active {
+            font-weight: normal;
+            text-decoration: none;
+        }
+    }
+
+    .app-command-bar-item  {
+        color: white;
+        font-size: 1.4em;
+        vertical-align: -webkit-baseline-middle;
+        padding-top: 2px;
+        float: right;
+        outline: 0px solid gray;
+        
+        a:link {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: $app_hover_color;
+            text-decoration: none;
+        }
+
+        a:active {
+            font-weight: normal;
+            text-decoration: none;
+        }
+    }
+
+    .app-spinner {
+        height: 30px;
+        color: $app_spinner_color;
+        font-size: 1.59em;
+        vertical-align: -webkit-baseline-middle;
+        padding-top: 6px;
+        float: right;
+        outline: 0px solid gray;
+
+        .spinner div {
+            background-color: $app_spinner_color;
+        }
+    }
+}
+
+a {
+    color: inherit;
+}
+
+a:focus, a:hover, a:active, a:visited, a:focus {
+       color: inherit;
+        text-decoration: none;
+        outline: none;
+}
+
+.bottom-panel {
+    width: 100%;
+    height: calc(100vh - #{$app_top_panel_height});
+    background-color: transparent;
+    outline: 0px solid black;
+    margin-top: $app_top_panel_height;
+
+    .app-navi {
+        width: $app_navigation_full_width;
+        height: calc(100vh - #{$app_top_panel_height});
+        background-color: whitesmoke;
+        float: left;
+        border-right: 1px solid $brand_outline_color;
+        outline: 0px solid black;
+
+        .home-menu {
+            width: 100%;
+            height: $app_navigation_home_menu_height;
+            background-color: #EAEAEA;
+            outline: 0px solid red;
+        }
+
+        .main-menu {
+            width: 100%;
+            height: calc(100vh - #{$app_top_panel_height} - #{$app_navigation_shortcut_menu_height} - #{$app_navigation_home_menu_height});
+            background-color: transparent;
+        }
+
+        .shortcut-menu {
+            width: 100%;
+            height: $app_navigation_shortcut_menu_height;
+            background-color: cornsilk;
+            outline: 0px solid green;
+        }
+    }
+
+    .app-content {
+        width: auto;
+        height: 100%;
+        background-color: transparent;
+        margin-left:$app_navigation_full_width;
+        outline: 0px solid red;
+
+        .title {
+            width: 100%;
+            height: $app_content_height;
+            background-color: $app_content_title_background_color;
+            border-bottom: 1px solid $brand_outline_color;
+
+            .pull-left {
+                
+                h4{   
+                    padding-left: 10px;
+                }
+                
+                span {
+                    color: #636363;
+                    font-size: 1.37em;
+                    font-weight: 600 ;
+                    line-height: normal;
+                }
+            }
+
+            .pull-right {
+                color: black;
+                padding: 0px;
+                margin: 0px;
+
+            }
+
+            .nav > li {
+                position: relative;
+                padding: 2px 14px 0px;
+            }
+        }
+
+        .content-command-bar-item  {
+            color: #ABABAB;
+            font-size: 1.2em;
+            vertical-align: -webkit-baseline-middle;
+            outline: 0px solid gray;
+            
+            a:link {
+                color: #ABABAB;
+                text-decoration: none;
+            }
+
+            a:visited {
+                color: #ABABAB;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #C9C9C9;
+                text-decoration: none;
+            }
+
+            a:active {
+                font-weight: normal;
+                text-decoration: none;
+            }
+        }
+
+        .body {
+            width: 100%;
+            background-color: $app_content_body_background_color;
+            font-size: .8em;
+            font-style: normal;
+        }
+	}
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+// App Slide Menu
+.app-slide-menu {
+    position: fixed;
+    width: $app_slide_menu_width; 
+    height: 100%;
+    background: $app_slide_menu_background_color;
+    top: $app_top_panel_height;
+    right: auto;
+    left: -$app_slide_menu_width;
+    bottom: 0;
+    z-index: 9999;
+
+    .base-container {
+        color: white;
+        text-align: center;
+        padding: 20px 30px;
+    }
+
+    .col-xs-4, .col-xs-8 {
+        padding-right: 2px;
+        padding-left: 2px;
+
+        a{
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+                cursor:pointer;
+            
+            .panel{
+                text-decoration: none;
+                background: $app_slide_menu_command_box_hover_color;
+            }
+
+            i.fa{
+                color: $app_slide_menu_command_box_icon_color !important;
+            }
+
+            p {
+                color: $app_slide_menu_command_box_icon_color !important;
+            }
+        } 
+    }
+
+    .panel {
+        margin-bottom: 4px;
+        background-color: rgba(80, 76, 76, 0.81);
+        border: none;
+        border-radius: 0px;
+        height: $app_slide_menu_panel_height;
+       
+       .panel-body {
+                padding: 0px 5px;
+                .iconBox{
+                    height: 48px;
+                    overflow: hidden;
+                    padding-top: 15px;
+                }
+                
+                .textBox{
+                    height:36px;
+                    overflow: hidden;
+                    padding: 0 5px;
+                }
+            }
+
+        .panel-body.active{
+            border-bottom: 2px solid $app_slide_menu_command_box_hover_color;
+
+            i.fa{
+                color: $app_slide_menu_command_box_hover_color;
+            }
+
+            p {
+                color: $app_slide_menu_command_box_hover_color;
+                font-weight: bold;
+            }
+        }
+
+        i.fa {
+            color: $app_slide_menu_icon_color;
+            font-size: $app_slide_menu_icon_size;
+        }
+
+        p {
+            margin: 0px 0 2px;
+            font-size: $app_slide_menu_text_size;
+        }
+    }
+}
+// End of App Slide Menu
+
+// App Navigation
+.app-navigation {
+    position: fixed;
+    width: auto; 
+    height: 100%;
+    background: $app_navigation_slide_menu_background_color;
+    border-right: 1px solid $brand_outline_color;
+    top: $app_top_panel_height;
+    right: auto;
+    bottom: 0;
+    z-index: 9;
+
+   .chevronBox {
+        background: #fff;
+        clear:both;
+        height:$app_header_separator_height;
+        border-bottom:1px solid $brand_outline_color;
+
+        .app-slide-menu-icon {
+            height: 25px;
+            float: left;
+            width: auto;
+            padding: 1px 15px;
+            color: black;
+        }
+
+        .panel-body {
+            float:right;
+            height: 20px;
+            width:auto;
+            color: black;
+            padding:1px 0;
+        }
+    }
+
+    .shortcut-icons{
+        position: fixed;
+        z-index: 100;
+        width: 260px;
+        bottom: 0;
+        height: $app_navigation_shortcut_menu_height;
+
+        .app-slide-menu-icon{
+            width: $app_top_panel_height;
+            float: left;
+            padding: 1px;
+            min-height: $app_navigation_shortcut_menu_height;
+            color:$app_slide_menu_background_color;
+            border-top:1px solid #D9D9D9;
+        }
+
+        .panel-body{
+            border-top:1px solid #D9D9D9;
+            float: left;
+            .row{
+                margin:0;
+                .col-xs-2{
+                    padding: 0;
+                    padding-right: 1px;
+                }
+            }
+        }
+        a{
+            background: #c1c1c1;
+            color: #f5f5f5 !important;
+            height: 30px;
+            text-align: center;
+            padding: 3px 0;
+            display: block;
+        }
+        a:hover{
+            background:$app_slide_menu_command_box_hover_color;
+        }
+        
+    }
+    
+    a {
+        cursor:pointer;
+    }
+
+    a:hover .clearfix {
+        background: $brand_color_main;
+        color: white;
+    }
+
+    hr {
+        clear: both;
+        border-color:$brand_outline_color;
+        margin:0;
+    }
+   
+    i, p {
+       cursor:pointer;
+    }
+
+    
+    .app-navigation-menu {
+        height: calc(100vh - #{$app_top_panel_height} - #{$app_top_panel_height} - 25px);
+        overflow: hidden;
+        padding-top: 18px;
+        // font-size: 0.8em;
+        border: 0px solid black;
+
+        i{
+            font-size: smaller;
+        }
+        a{
+            text-decoration: none;
+            padding: 10px 5px;
+        }
+      
+        li{
+            clear:both;
+            cursor:pointer;
+            min-height: 20px;
+            ul{
+                padding-left: 5px;
+                padding-bottom: 0px;
+                clear: both;
+                
+            }
+            span.font-group-style + ul{
+                margin-left: 40px;
+                
+
+                ul{
+                    margin-left:16px;
+                     li:hover{
+                        background: lighten( $brand_color_main, 20%);
+                        // lighten();
+                    }
+                   
+                }
+                .panel-body {
+                    width: auto;
+                    float: left;
+                    padding-left: 5px;
+                    display: inline-block;
+                }
+                i.app-slide-menu-icon {
+                    float: left;
+                    display: inline-block;
+                    width: auto;
+                    position: relative;
+                }
+               
+
+            } 
+        }
+    
+        li.show {
+             ul{
+                display: none;
+            }
+        }
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            margin-bottom: 0px;
+            padding: 0px;
+
+            .font-group-style {
+                font-weight: bold;
+            }            
+        }
+
+        .app-slide-menu-icon{
+            width: $app_top_panel_height;
+            left: 0;
+            top:auto;
+            display: inline-block;
+            z-index: 1000;
+            text-align:center;
+            padding: 2px;
+            min-height: $app_navigation_shortcut_menu_height;
+            color:$app_slide_menu_background_color;
+        }
+
+        .panel-body {
+            float: right;
+            min-height: $app_navigation_shortcut_menu_height;
+            width:220px;
+            padding: 2px 0px;
+            color:$app_slide_menu_background_color;
+            overflow: hidden;
+            font-size: $app_slide_menu_text_size;
+
+            p {
+                font-size: $app_slide_menu_text_size;
+            }
+
+            .detail {
+                width: $app_navigation_detail_width;
+                position: static;
+                padding:3px;
+            }
+        }
+    }
+
+   .slimscroll-bar {
+            display:none !important;
+            height: 60px !important;
+            //  !important;
+    }
+
+   .slimscroll-wrapper:hover .slimscroll-bar {
+            display:block !important;
+            //  !important;
+    }
+
+}
+// End of App Navigation
+
+// App Route Animation
+x365-app .app-content .container {
+        width: 100%;
+        overflow: hidden;
+         padding: 0;
+        .content{
+            height: calc(100vh - #{$app_content_height} - #{$app_top_panel_height});
+            background: #fff;
+            -webkit-animation: 0.8s animationSlide;
+            -moz-animation: 0.8s animationSlide;
+            -o-animation: 0.8s animationSlide;
+            animation: 0.8s animationSlide;
+        } 
+ 
+}
+
+@keyframes animationSlide {
+  from {
+    margin-left: 6%;
+    opacity: 0; }
+  98.5% {
+    margin-left: 0%;
+    opacity: 1; }
+}
+ 
+@-webkit-keyframes animationSlide {
+  from {
+    margin-left: 6%;
+    opacity: 0; }
+  98.5% {
+    margin-left: 0%;
+    opacity: 1; } 
+}
+

@@ -1,0 +1,372 @@
+<nav class="navbar  top-panel">
+    <div class="container-fluid web-container">
+        <div class="navbar-left">
+             <ul class="nav"> 
+                    <li>
+                        <div class='app-menu' [style.background-image]="faviconUrl()">
+                            <a (click)="toggleAppSlideMenu()" ></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class='app-logo' [style.background-image]="logoUrl()">
+                            <a href="http://xceed365.com"></a>
+                        </div>
+                    </li>
+                    <li>
+                       <div class='app-edition-name'>{{ appData?.edition }}</div>
+                    </li>
+                    <li class="list-separator">
+                       <div class='app-header-separator pull-left'></div>
+                    </li>
+                    <li>
+                        <div class='app-module-name'>{{ selectedModule?.name }}</div>
+                    </li>
+             </ul>
+        </div>
+
+        <div class="navbar-right">
+            <ul class="nav">
+                <li>
+                    <div class='app-spinner'>
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-separator">
+                    <span class='app-header-separator app-panel-separator-h-70 pull-right'></span>
+                </li>
+                <li>
+                    <div class='app-command-bar-item' title="Global search"><a href="#"><i class='icon-white fa fa-search'></i></a></div>
+                </li>
+                 <li class="list-separator">
+                    <span class='app-header-separator app-panel-separator-h-70 pull-right'></span>
+                </li>
+                <li>
+                    <div class='app-notifications' title="Notifications"><a href="#"><i class='icon-white fa fa-bell-o'></i></a></div>
+                </li>
+
+                <li class="list-separator">
+                    <span class='app-header-separator app-panel-separator-h-70 pull-right'></span>
+                </li>
+                <li>
+                    <div class='app-command-bar-item' title="History (visited pages)"><a href="#"><i class='icon-white fa fa-history'></i></a></div>
+                </li>
+                <li class="list-separator">
+                    <span class='app-header-separator app-panel-separator-h-70 pull-right'></span>
+                </li>
+                 <li>
+                    <span class="app-profile-name">{{getUserName()}}</span>
+                </li>
+                <li class="list-separator">
+                    <span class='app-header-separator app-panel-separator-h-70 pull-right'></span>
+                </li>
+                <li>
+                    <div class='app-profile-picture '></div>
+                </li>
+                <li class="list-separator">
+                    <span class='app-header-separator app-panel-separator-h-70 pull-right'></span>
+                </li>
+                <li>
+                    <span class="app-sign-out" title="Sign out"><a href="#" (click)="signOut()"><i class='icon-white fa fa-power-off'></i></a></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class='bottom-panel'>
+    <div class="app-slide-menu" [@appSlideInOut]="appSlideMenuState" >
+        <div class="base-container">
+            <div class="row">
+                <!--Home-->
+               <div class="col-xs-8">
+                    <div class="panel"> 
+                        <a (click)="navigateToDashboard()" > 
+                            <div class="panel-body" >
+                                <div class="iconBox">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <div class="textBox">
+                                    <p class="text-center">Home </p>
+                                </div>
+                            </div>
+                       </a>
+                    </div>
+                </div>
+
+                <!--App modules-->
+                <ng-template ngFor let-amd [ngForOf] = "appData?.appModuleData"  let-i = "index">
+                    <div class="col-xs-4">
+                       <a (click)="selectModule(amd)" > 
+                            <div class="panel" >  
+                                <div class="panel-body" [class.active]="selectedModule?.id === amd?.id" >
+                                    <div class="iconBox">
+                                        <i class="fa {{amd?.imageUrl}}"></i>
+                                    </div>
+                                    <div class="textBox">
+                                        <p class="text-center">{{amd?.shortName}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                       </a>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div class='app-navigation'>
+        <div class="chevronBox"></div>
+
+        <div class="app-navigation-menu"   slimScroll [options]="opts" >
+            <!--<html-outlet [html]="navMenuTemplate"></html-outlet>-->
+
+            <!-- this is the option to copying the template-->
+            <!--<ul class="theGroups">
+                    <ng-template ngFor let-amd2 [ngForOf] = "selectedModule.appModuleWorkItemList"  let-i = "index">
+
+                        <li class="" (click)="amd2.showSubmenu =!amd2.showSubmenu" [class.show]='amd2.showSubmenu' >
+                            <i class="fa fa-chevron-down app-slide-menu-icon"  *ngIf='amd2.isGroup'></i>
+                            <span class=" panel-body" [class.font-group-style]='amd2.isGroup' > {{ amd2.name }}  </span> 
+                            <ul class="theGroups" *ngIf='amd2.appModuleWorkItemList'>
+                                <li class="" *ngFor="let amd3 of amd2.appModuleWorkItemList"   [class.show]='amd3.showSubmenu' >
+                                    <i class="fa fa-chevron-down app-slide-menu-icon"  *ngIf='amd3.isGroup'></i>
+                                    <span class=" panel-body"  [class.font-group-style]='amd3.isGroup' > {{ amd3.name }}  </span> 
+                                    <ul class="theGroups" *ngIf='amd3.appModuleWorkItemList'>
+                                        <li class="" *ngFor="let amd4 of amd3.appModuleWorkItemList"  [class.show]='amd4.showSubmenu' >
+                                            <i class="fa fa-chevron-down app-slide-menu-icon" *ngIf='amd4.isGroup'></i>
+                                            <span class=" panel-body"  [class.font-group-style]='amd4.isGroup' > {{ amd4.name }}  </span> 
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>          
+                    </ng-template>
+                </ul>-->
+                    <ul class="" *ngIf="selectedModule.rank == 1"  >
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Personal Data</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Guarantors</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Beneficiaries</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Education History</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Previous Employments</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Custom Forms</a></span></li>
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 2" >
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Details</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Initiates</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Resets</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">REPORTS</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Supervisors</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Setups</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Surveys</a></span></li>
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 3" >
+                        <li class="theGroups" [class.show]='selectedModule.appModuleWorkItemList[0].showSubmenu' >
+                            <i class="fa app-slide-menu-icon"  [ngClass]="{'fa-chevron-down ': !selectedModule.appModuleWorkItemList[0].showSubmenu , 'fa-chevron-up ': selectedModule.appModuleWorkItemList[0].showSubmenu }"
+                             (click)="selectedModule.appModuleWorkItemList[0].showSubmenu = !selectedModule.appModuleWorkItemList[0].showSubmenu"></i><span class="font-group-style panel-body">Loans {{ selectedModule.appModuleWorkItemList[0].showSubmenu }}</span>
+                            <ul class="">
+                                <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body" class.hide="navigationSlideMenuState ='in' " routerLink="/compensation/loans/apply" routerLinkactive="active"  ng-reflect-router-link-active="active">Apply</a></span></li>
+                                <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body" class.hide="navigationSlideMenuState ='in' " routerLink="/compensation/loans" routerLinkactive="active"  ng-reflect-router-link-active="active" >Applications</a></span></li>
+                            </ul>
+                        </li>
+                        <li class="theGroups"><i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Configure</span>
+                            <ul class="">
+                                <li class="theGroups"> <i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Payroll Dependencies</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Formular Management</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Grade Management</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Payment Groups</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Currency Management</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Payroll Profile</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Calendar Manangement</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Bank Management</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Pension Fund Administration</a></span></li>
+                                    </ul>
+                                </li>
+                                <li class="theGroups"> <i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Elements</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Fix Allowance</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Variable Allowance</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Variable Allowance Transactions</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Fixed Deduction</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Variable Deduction</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Variable Deduction Transactions</a></span></li>
+                                    </ul> 
+                                </li>
+                                <li class="theGroups"> <i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Payroll Regulations</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Tax Management</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Relief Management</a></span></li>
+                                    </ul> 
+                                </li>
+                                <li class="theGroups"><i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Payroll Adjustments</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Exclusion</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Salary Review</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Amortization</a></span></li>
+                                    </ul> 
+                                </li>
+                                <li class="theGroups"> <i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Periodic Payroll Runs</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Run Payroll Management</a></span></li>
+                                    </ul> 
+                                </li>
+                                <li class="theGroups"><i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Payroll Integration</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">New Data Session</a></span></li>
+                                    </ul> 
+                                </li>
+                                <li class="theGroups"><i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Payments</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Payment File Generation</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Direct Account Credit</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Pension Remittance Setup</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Tax remittance setup</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Create schedule</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Other remittance</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Other remittance number</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Ad-hoc payment</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Approved payment</a></span></li>
+                                    </ul> 
+                                </li>
+                                <li class="theGroups">  <i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Loan managementt</span>
+                                    <ul class="">
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Loan definition</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Transaction</a></span></li>
+                                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Repayments</a></span></li>
+                                    </ul>
+                                </li>
+                                <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Payroll reports</a></span></li>
+                            </ul> 
+                        </li>
+                        <li class="theGroups"> <i class="fa fa-chevron-down app-slide-menu-icon"></i><span class="font-group-style panel-body">Payments</span>
+                            <ul class=""><li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Setup</a></span></li>
+                            </ul> 
+                        </li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Payslips</a></span></li>
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 4">
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Transaction</a></span></li>
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 5">
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 6">
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Approve selected</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Decline selected</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Redirect selected</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Approve all</a></span></li>
+                    </ul>
+                    <ul class=""  *ngIf="selectedModule.rank == 7">
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Leave</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Transfer</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Setup</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Advanced</a></span></li>
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 8">
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">HMO Setup</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Hospital Setup</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">SUbmit Receipt</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">SUbmit Reiceipt</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">SUbmit Receipt</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Medical limit</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Manage adjustment</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Bill recovery </a></span></li>
+                    </ul>
+                    <ul class="" *ngIf="selectedModule.rank == 9">
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Setup</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Batch</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Recommend</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Apply</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Team</a></span></li>
+                    </ul>
+                    <ul class=""  *ngIf="selectedModule.rank == 10">
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Details</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Initiates</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Resets</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">REPORTS</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Supervisors</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Setups</a></span></li>
+                        <li class=""><span><i class="app-slide-menu-icon"></i><a class="panel-body active" class.hide="navigationSlideMenuState ='in' " routerLink="" routerLinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="/">Surveys</a></span></li>
+                    </ul>
+        </div>
+
+        <div class="shortcut-icons">
+            <div class="app-slide-menu-icon text-center">
+                <a href="" title="description">
+                    <i class="fa fa-bell-o" ></i>
+                </a>
+            </div>
+            <div class="panel-body text-right" [@navigationSlideInOut]="navigationSlideMenuState">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="" title="description">
+                            <i class="fa fa-home-o" ></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="" title="description">
+                            <i class="fa fa-plus" ></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="" title="description">
+                            <i class="fa fa-briefcase" ></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="" title="description">
+                            <i class="fa fa-plus" ></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="" title="description">
+                            <i class="fa fa-briefcase" ></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="" title="description">
+                            <i class="fa fa-plus" ></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class='app-content' [@slideContentBox]="navigationSlideMenuState">
+        <div class='title'>
+            <div class=" pull-left">
+                <h4>{{ pageTitle }}</h4>
+            </div>
+
+            <div class="pull-right" title="Click to go back">
+                <ul class="nav"> 
+                    <li>
+                        <div class='content-command-bar-item'>
+                            <a href="#" class="fa-stack">
+                                <i class="fa fa-circle-o fa-stack-2x"></i>
+                                <i class='fa-stack-1x fa fa-arrow-left'></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class='body'>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
