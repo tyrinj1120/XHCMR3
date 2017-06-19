@@ -45,7 +45,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
         if (this.coreDataService.getAppData() != null){
             this.appData = this.coreDataService.getAppData();
 
-console.log(this.appData);
+            console.log(this.appData);
 
             //this.selectedModule = this.appData.appModuleData[2];
         }
