@@ -1,5 +1,6 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
@@ -24,6 +25,7 @@ import { SecurityModule } from "./shared/security-shared-module/security.module"
 
 /* Standard Modules */
 import { AppRoutingModule } from './routing/app-routing.module';
+import { BaseModule } from "./areas/base/base.module";
 
 /* Third-party services */
 import { AdalService } from 'ng2-adal/core';
@@ -35,9 +37,10 @@ import { CoreService } from './core/services/core.service';
 import { RouteGuard } from "./shared/general-shared-module/security/route-guard.service";
 import { DefaultRequestOptions } from "./core/services/default-request-options.service";
 
+
 @NgModule({
   declarations: [ AppComponent, HomeComponent, AuthorizationComponent, SignupComponent ],
-  imports: [ BrowserModule, HttpModule, LocalStorageModule.withConfig({ prefix: 'x365-hcm-r3', storageType: 'localStorage' }), CoreModule, SecurityModule, DashboardModule, AppRoutingModule],
+  imports: [ BrowserModule, BrowserAnimationsModule, HttpModule, LocalStorageModule.withConfig({ prefix: 'x365-hcm-r3', storageType: 'localStorage' }), CoreModule, SecurityModule, DashboardModule, BaseModule, AppRoutingModule],
   providers: [REQUEST_OPTIONS_PROVIDER, AdalService, DefaultRequestOptions, DefaultRequestOptions, CoreService, RouteGuard],
   bootstrap: [AppComponent]
 })

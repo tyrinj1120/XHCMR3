@@ -44,7 +44,10 @@ export class BaseComponent implements OnInit, AfterViewInit {
     constructor(private coreDataService: CoreDataService, private adalService: AdalService, private localStore: LocalStorageService, private activatedRoute: ActivatedRoute, private router: Router, @Inject(DOCUMENT) private document:any , private titleService: Title) {       
         if (this.coreDataService.getAppData() != null){
             this.appData = this.coreDataService.getAppData();
-            this.selectedModule = this.appData.appModuleData[2];
+
+console.log(this.appData);
+
+            //this.selectedModule = this.appData.appModuleData[2];
         }
     }
 

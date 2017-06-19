@@ -12,7 +12,7 @@ export const BaseRoutes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuard], data: { title: 'Dashboard' } },
-            { path: 'compensation', loadChildren: './../../areas/1hcm/work-force/compensation/compensation.module#CompensationModule' }
+            { path: 'compensation', loadChildren: '../../../areas/1hcm/work-force/compensation/compensation.module#CompensationModule' }
         ]
     }
 ];
