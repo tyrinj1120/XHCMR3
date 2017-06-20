@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
     if (value != null) {
       let appData: AppData =  new AppData(value.name, 'HCM Enterprise', '', './../../../assets/images/x365-icon.png', '');
 
-      console.log(AppStructureMap.getMap());
       appData.appModuleData = AppStructureMap.getMap();
 
       return appData;

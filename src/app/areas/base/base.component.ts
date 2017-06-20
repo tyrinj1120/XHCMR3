@@ -26,10 +26,9 @@ import { AppConstants } from "../../constants/app.constants";
     styleUrls: ['./base.component.scss', './animations/base.component.scss'],
     animations: [appRouteTransition(), appSlideInOut(), navigationSlideInOut(), rotateLeft(), rotateRight(), slideChevronBox(), slideInOutAnimation(), slideContentBox(), chevronRotation(), appNotificationSlide()],
     host: { '[@appRouteTransition]': '','[@appSlideInOut]':'','[@navigationSlideInOut]':'','[@rotateLeft]':'', '[@rotateRight]':'','[@slideChevronBox]':'','[@slideInOutAnimation]':'', '[@slideContentBox]':'','[@chevronRotation]':'','[@appNotificationSlide]':''}
-    
     //encapsulation: 1
 })
-export class BaseComponent implements OnInit, AfterViewInit {
+export class BaseComponent implements OnInit {
     public appData:  AppData = new AppData('', '', '', '', '');
     public pageTitle: string = '';
     private appSlideMenuState : string = 'in';
@@ -74,29 +73,6 @@ export class BaseComponent implements OnInit, AfterViewInit {
        };
     }
 
-    public ngAfterViewInit() {
-        this.navMenuTemplate = this.getNavMenuTemplate(this.selectedModule.appModuleWorkItemList);
-    }
-
-    private getNavMenuTemplate(appModuleWorkItemList: AppModuleWorkItemData[]): string {
-        this.tempNavMenuTemplate = this.tempNavMenuTemplate + `<ul>`;
-
-        appModuleWorkItemList.forEach((item) => {
-            if (item.isGroup) {
-                this.tempNavMenuTemplate = this.tempNavMenuTemplate + `<li class="animated fadeInDown"><span class="font-group-style"><i class="fa fa-chevron-down"></i>` + item.name + `</span></li>`;
-                if (item.appModuleWorkItemList){
-                    this.getNavMenuTemplate(item.appModuleWorkItemList);
-                }
-            }else{
-                this.tempNavMenuTemplate = this.tempNavMenuTemplate + `<li><span><i></i><a routerLink="` + item.routePath + `" routerLinkActive="active">` + item.name + `</a></span></li>`;
-            }
-        }) 
-
-        this.tempNavMenuTemplate = this.tempNavMenuTemplate + `</ul>`;
-        
-        return this.tempNavMenuTemplate;
-    }
-
     public faviconUrl (): string {
          return "url('" + this.appData.faviconUrl + "')"; 
     }
@@ -115,10 +91,6 @@ export class BaseComponent implements OnInit, AfterViewInit {
 
     public selectModule(value:AppModuleData):void {
         this.selectedModule = value;
-        this.navMenuTemplate = this.getNavMenuTemplate(this.selectedModule.appModuleWorkItemList);
-
-        // Reset temp variable for next use. Consider reviewing this by using ref or static variable passed to function
-        this.tempNavMenuTemplate = ``;
 
         this.toggleAppSlideMenu();
     }
