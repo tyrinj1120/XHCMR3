@@ -23,27 +23,30 @@ export class AuthorizationComponent {
       let token: string = adalService.getCachedToken(clientId);
       
       // To delete ------------------
-      localStore.set(AppConstants.ACCESS_TOKEN, token);
-      this.router.navigate(['/dashboard']); 
+      //localStore.set(AppConstants.ACCESS_TOKEN, token);
+      //this.router.navigate(['/dashboard']); 
       //-----------------------------
 
 
-      // this.authService.verifyUserToken(token)
-      //   .subscribe(
-      //     response => {
-      //       localStore.set(AppConstants.ACCESS_TOKEN, token);
+      this.authService.verifyUserToken(token)
+        .subscribe(
+          response => {
+            localStore.set(AppConstants.ACCESS_TOKEN, token);
 
-      //       // Build current user profile object and save in CoreDataService
+            // Build current user profile object and save in CoreDataService
 
-      //       // Set App Edition i.e "HCM Enterprise" 
+            // Set App Edition i.e "HCM Enterprise" 
 
-      //       this.router.navigate(['/dashboard']); 
-      //     },
-      //     error => {
-      //       console.log('Error: ' + error);
-      //       this.router.navigate(['/home']); 
-      //     }
-      //   )
+            this.router.navigate(['/dashboard']); 
+          },
+          error => {
+            console.log('Error: ' + error);
+            this.router.navigate(['/home']); 
+          }
+        )
+
+
+
     }else{
       this.router.navigate(['/home']); 
     }

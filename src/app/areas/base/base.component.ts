@@ -44,10 +44,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
     constructor(private coreDataService: CoreDataService, private adalService: AdalService, private localStore: LocalStorageService, private activatedRoute: ActivatedRoute, private router: Router, @Inject(DOCUMENT) private document:any , private titleService: Title) {       
         if (this.coreDataService.getAppData() != null){
             this.appData = this.coreDataService.getAppData();
-
-            console.log(this.appData);
-
-            //this.selectedModule = this.appData.appModuleData[2];
+            this.selectedModule = this.appData.appModuleData[1];
         }
     }
 
@@ -71,7 +68,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
         this.slimScrollOptions = {
             position: 'right',
             barBackground: '#ccc',
-            barWidth:'4',
+            barWidth:'3',
             gridWidth:'0',
             barMargin:'1px 3px',
        };

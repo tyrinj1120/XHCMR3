@@ -11,6 +11,13 @@ body {
     color: black;
     font-family:'Segoe UI', sans-serif !important;
     
+    .root-content-body {
+        width: 100%;
+        height: calc(100vh - #{$app_top_panel_height} - #{$app_content_height});
+        background-color: white;
+        border: 0px solid transparent;
+    }
+
     .loader {
         background: white;
 

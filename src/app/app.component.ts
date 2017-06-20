@@ -14,6 +14,7 @@ import { AppData } from './models/system/app-data/app.data';
 
 // import { WellknownURIs } from './constants/wellknown-uris.constants'
 import { EnvSettingsData } from "app/models/system/env-settings/env-settings.data";
+import { AppStructureMap } from "app/struct-map/app-structure.map";
 
 @Component({
   selector: 'x365-app',
@@ -33,8 +34,10 @@ export class AppComponent implements OnInit {
 
   private getAppData(value: EnvSettingsData): AppData {
     if (value != null) {
-      let appData: AppData =  new AppData(value.name, 'HCM Enterprise', '', '', '');
-      //appData.appModuleData = AppStructureMap.appModuleList();
+      let appData: AppData =  new AppData(value.name, 'HCM Enterprise', '', './../../../assets/images/x365-icon.png', '');
+
+      console.log(AppStructureMap.getMap());
+      appData.appModuleData = AppStructureMap.getMap();
 
       return appData;
     }
